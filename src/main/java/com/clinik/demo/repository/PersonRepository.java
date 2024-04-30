@@ -1,6 +1,6 @@
-package repository;
+package com.clinik.demo.repository;
 
-import entity.Person;
+import com.clinik.demo.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

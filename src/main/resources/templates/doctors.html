@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <title>Doctors</title>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Список докторов в системе</h1>
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+<!--            <th>Фамилия</th>-->
+<!--            <th>Отчество</th>-->
+            <th>Профиль</th>
+            <th>Специальность</th>
+            <th>Дата приема на работу</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.getIdEmployee()}"></td>
+            <td th:text="${doctor.getPerson.getFirstName()}"></td>
+<!--            <td th:text="${doctor.getPerson().getLastName()}"></td>-->
+<!--            <td th:text="${doctor.getPerson().getPatronymic()}"></td>-->
+            <td th:text="${doctor.getProfile()}"></td>
+            <td th:text="${doctor.getSpecialty()}"></td>
+            <td th:text="${doctor.getEmploymentDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

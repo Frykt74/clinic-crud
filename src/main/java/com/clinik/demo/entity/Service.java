@@ -1,4 +1,4 @@
-package entity;
+package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
 
@@ -11,8 +11,8 @@ public class Service {
     private Long idService;
 
     @ManyToOne
-    @JoinColumn(name = "id_employee", referencedColumnName = "id_employee")
-    private Doctor id_employee;
+    @JoinColumn
+    private Doctor doctor;
 
     @Column(name = "name")
     private String name;

@@ -1,4 +1,4 @@
-package entity;
+package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
@@ -12,7 +12,7 @@ public class Doctor {
     private Long idEmployee;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn // Не указываем имя столбца, Hibernate использует значение по умолчанию
+    @JoinColumn(name = "id_person")
     private Person person;
 
     @Column(name = "profile")
@@ -34,5 +34,25 @@ public class Doctor {
 
     public void setEmploymentDate(Date employmentDate) {
         this.employmentDate = employmentDate;
+    }
+
+    public Long getIdEmployee() {
+        return idEmployee;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public Date getEmploymentDate() {
+        return employmentDate;
     }
 }

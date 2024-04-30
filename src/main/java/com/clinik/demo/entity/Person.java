@@ -1,4 +1,4 @@
-package entity;
+package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;

@@ -1,9 +1,9 @@
-package service;
+package com.clinik.demo.service;
 
-import entity.Person;
+import com.clinik.demo.entity.Person;
+import com.clinik.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.PersonRepository;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class PersonService {
         return personRepository.findById(id).orElse(null);
     };
 
-    public List<Person> getAllPeople() {
+    public List<Person> findAllPeople() {
         return personRepository.findAll();
     }
 

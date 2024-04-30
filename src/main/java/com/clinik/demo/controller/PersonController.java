@@ -1,11 +1,11 @@
-package controller;
+package com.clinik.demo.controller;
 
-import entity.Person;
+import com.clinik.demo.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import service.PersonService;
+import com.clinik.demo.service.PersonService;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showAllPeople(Model model) {
-        List<Person> people = personService.getAllPeople();
+        List<Person> people = personService.findAllPeople();
         model.addAttribute("people", people);
         return "people";
     }
