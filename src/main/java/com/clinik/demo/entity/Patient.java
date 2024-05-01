@@ -10,9 +10,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMedicalCard;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_person")
-    private Person id_person;
+    private Person person;
 
     @Column(name = "policy", columnDefinition = "bigint")
     private Long policy;
@@ -53,6 +53,9 @@ public class Patient {
         return idMedicalCard;
     }
 
+    public Person getPerson() {
+        return person;
+    }
 
     public Long getPolicy() {
         return policy;

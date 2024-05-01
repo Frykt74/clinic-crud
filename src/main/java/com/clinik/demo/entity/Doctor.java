@@ -11,7 +11,7 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployee;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
 
@@ -23,6 +23,9 @@ public class Doctor {
 
     @Column(name = "employment_date")
     private Date employmentDate;
+
+    @Column(name = "cabinet")
+    private String cabinet;
 
     public void setProfile(String profile) {
         this.profile = profile;
@@ -54,5 +57,13 @@ public class Doctor {
 
     public Date getEmploymentDate() {
         return employmentDate;
+    }
+
+    public String getCabinet() {
+        return cabinet;
+    }
+
+    public void setCabinet(String cabinet) {
+        this.cabinet = cabinet;
     }
 }

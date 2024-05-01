@@ -11,9 +11,9 @@ public class MedicalCard {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_appointment")
-    private Appointment id_appointment;
+    private Appointment appointment;
 
     @Column(name = "complaint")
     private String complaint;
@@ -29,6 +29,10 @@ public class MedicalCard {
 
     public String getComplaint() {
         return complaint;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     public void setComplaint(String complaint) {

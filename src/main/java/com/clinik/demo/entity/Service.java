@@ -11,7 +11,7 @@ public class Service {
     private Long idService;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "id_employee")
     private Doctor doctor;
 
     @Column(name = "name")
@@ -32,7 +32,15 @@ public class Service {
         return price;
     }
 
+    public Long getIdService() {
+        return idService;
+    }
+
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <title>Appointments</title>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Запись на приём</h1>
+    <a th:href="@{/appointments/new}" class="btn btn-primary btn-sm mb-3">Добавить запись</a>
+
+    <table border="1" class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Врач</th>
+            <th>Кабинет</th>
+            <th>Услуга</th>
+            <th>Пацитент</th>
+            <th>Дата</th>
+            <th>Время</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+<!--            TODO: инициалы-->
+            <td th:text="${appointment.getEmployee().getPerson().getLastName()}"></td>
+            <td th:text="${appointment.getEmployee().getCabinet()}"></td>
+            <td th:text="${appointment.getService().getName()}"></td>
+            <td th:text="${appointment.getPatient().getPerson().getLastName()}"></td>
+            <td th:text="${appointment.getAppointmentDate()}"></td>
+            <td th:text="${appointment.getAppointmentTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

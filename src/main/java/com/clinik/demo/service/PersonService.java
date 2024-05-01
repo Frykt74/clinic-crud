@@ -17,7 +17,7 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Person findById(Long id) {
+    public Person findPersonById(Long id) {
         return personRepository.findById(id).orElse(null);
     };
 
@@ -25,11 +25,11 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public void save(Person person) {
+    public void savePerson(Person person) {
         personRepository.save(person);
     }
 
-    public void delete(Long id) {
+    public void deletePersonById(Long id) {
         personRepository.deleteById(id);
     }
 }

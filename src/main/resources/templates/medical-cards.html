@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <title>Cards</title>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Картотека</h1>
+    <table class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Дата приёма</th>
+            <th>Пациент</th>
+            <th>Жалобы</th>
+            <th>Осмотр</th>
+            <th>Заключение</th>
+            <th>Выписка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="card : ${cards}">
+            <td th:text="${card.getAppointment().getAppointmentDate()}"></td>
+            <td th:text="${card.getAppointment().getAppointmentTime()}"></td>
+            <td th:text="${card.getComplaint()}"></td>
+            <td th:text="${card.getExamination()}"></td>
+            <td th:text="${card.getCertificate()}"></td>
+            <td th:text="${card.getDischarge()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
