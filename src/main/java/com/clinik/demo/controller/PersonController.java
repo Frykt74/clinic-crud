@@ -21,7 +21,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showAllPeople(Model model) {
         List<Person> people = personService.findAllPeople();
         model.addAttribute("people", people);
@@ -39,7 +39,7 @@ public class PersonController {
     @PostMapping("/save")
     public String savePerson(@ModelAttribute("person") @DateTimeFormat(pattern="dd.MM.yyyy") Person person) {
         personService.savePerson(person);
-        return "redirect:/people/";
+        return "redirect:/people";
     }
 //
 //    // Показать форму для редактирования персоны
