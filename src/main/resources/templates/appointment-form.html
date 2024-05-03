@@ -11,27 +11,20 @@
     <hr>
     <h2>Сохранить информацию</h2>
 
-    <form action="#" th:action="@{/appointments/save}" th:object="${appointment}" method="POST">
-
-<!--        <input type="text" th:field="*{employee.person.lastName}" placeholder="Врач" class="form-control mb-4 col-4">-->
-<!--        <input type="text" th:field="*{employee.cabinet}" placeholder="Дата приёма" class="form-control mb-4 col-4">-->
-<!--        <input type="text" th:field="*{service.name}" placeholder="Услуга" class="form-control mb-4 col-4">-->
-<!--        <input type="text" th:field="*{patient.person.lastName}" placeholder="Пациент" class="form-control mb-4 col-4">-->
-
-
-
-        <input type="text" th:field="*{appointmentDate}" placeholder="Дата приёма" class="form-control mb-4 col-4">
-
-        <input type="text" th:field="*{appointmentTime}" placeholder="Время приёма" class="form-control mb-4 col-4">
-
-
-
-        <button type="submit" class="btn btn-info col-2">Сохранить</button>
+    <!-- Форма поиска услуги -->
+    <form action="/services/search" method="GET">
+        <div class="form-group">
+            <label for="keyword">Введите название услуги:</label>
+            <input type="text" id="keyword" name="keyword" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Поиск услуги</button>
     </form>
+
+    <button type="submit" class="btn btn-info col-2">Сохранить</button>
 
     <hr>
 
-    <a th:href="@{/appointments/}">К общему списку</a>
+    <a th:href="@{/appointments}">К общему списку</a>
 </div>
 </body>
 </html>

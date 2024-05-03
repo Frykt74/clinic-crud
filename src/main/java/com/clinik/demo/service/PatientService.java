@@ -21,7 +21,7 @@ public class PatientService {
         return patientRepository.findById(id).orElse(null);
     }
 
-    public List<Patient> findAllPatient() {
+    public List<Patient> findAllPatients() {
         return patientRepository.findAll();
     }
 

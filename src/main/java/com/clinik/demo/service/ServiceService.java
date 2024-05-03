@@ -20,7 +20,7 @@ public class ServiceService {
         return serviceRepository.findById(id).orElse(null);
     }
 
-    public List<Service> findAll() {
+    public List<Service> findAllServices() {
         return serviceRepository.findAll();
     }
 
@@ -30,5 +30,9 @@ public class ServiceService {
 
     public void delete(Long id) {
         serviceRepository.deleteById(id);
+    }
+
+    public List<Service> findServicesByName(String name) {
+        return serviceRepository.findAllByName(name);
     }
 }

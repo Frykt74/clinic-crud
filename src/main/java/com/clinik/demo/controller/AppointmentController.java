@@ -2,6 +2,9 @@ package com.clinik.demo.controller;
 
 import com.clinik.demo.entity.Appointment;
 import com.clinik.demo.service.AppointmentService;
+import com.clinik.demo.service.DoctorService;
+import com.clinik.demo.service.PatientService;
+import com.clinik.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +21,7 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @Autowired
-    private AppointmentController(AppointmentService appointmentService) {
+    public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
 

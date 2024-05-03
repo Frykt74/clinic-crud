@@ -3,6 +3,7 @@ package com.clinik.demo.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 @Table(name = "appointment")
@@ -28,7 +29,7 @@ public class Appointment {
     private Date appointmentDate;
 
     @Column(name = "appointment_time")
-    private String appointmentTime;
+    private Time appointmentTime;
 
     public Long getIdAppointment() {
         return idAppointment;
@@ -50,7 +51,7 @@ public class Appointment {
         return appointmentDate;
     }
 
-    public String getAppointmentTime() {
+    public Time getAppointmentTime() {
         return appointmentTime;
     }
 
@@ -58,7 +59,7 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
     }
 
-    public void setAppointmentTime(String appointmentTime) {
+    public void setAppointmentTime(Time appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
 }

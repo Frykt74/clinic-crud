@@ -23,7 +23,7 @@ public class PatientController {
 
     @GetMapping("")
     public String showAllPatients(Model model) {
-        List<Patient> patients = patientService.findAllPatient();
+        List<Patient> patients = patientService.findAllPatients();
         model.addAttribute("patients", patients);
         return "patients";
     }
