@@ -1,8 +1,11 @@
 package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "doctor")
 public class Doctor {
@@ -26,44 +29,4 @@ public class Doctor {
 
     @Column(name = "cabinet")
     private String cabinet;
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
-    public void setEmploymentDate(Date employmentDate) {
-        this.employmentDate = employmentDate;
-    }
-
-    public Long getIdEmployee() {
-        return idEmployee;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public Date getEmploymentDate() {
-        return employmentDate;
-    }
-
-    public String getCabinet() {
-        return cabinet;
-    }
-
-    public void setCabinet(String cabinet) {
-        this.cabinet = cabinet;
-    }
 }

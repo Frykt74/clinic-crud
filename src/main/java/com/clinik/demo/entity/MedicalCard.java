@@ -1,7 +1,9 @@
 package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "medical_card")
 
@@ -26,40 +28,4 @@ public class MedicalCard {
 
     @Column(name = "discharge")
     private String discharge;
-
-    public String getComplaint() {
-        return complaint;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
-    }
-
-    public String getExamination() {
-        return examination;
-    }
-
-    public void setExamination(String examination) {
-        this.examination = examination;
-    }
-
-    public String getCertificate() {
-        return certificate;
-    }
-
-    public void setCertificate(String certificate) {
-        this.certificate = certificate;
-    }
-
-    public String getDischarge() {
-        return discharge;
-    }
-
-    public void setDischarge(String discharge) {
-        this.discharge = discharge;
-    }
 }

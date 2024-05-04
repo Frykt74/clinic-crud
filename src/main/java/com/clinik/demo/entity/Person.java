@@ -1,8 +1,11 @@
 package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "person")
 public class Person {
@@ -22,40 +25,4 @@ public class Person {
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getIdPerson() {
-        return idPerson;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
 }

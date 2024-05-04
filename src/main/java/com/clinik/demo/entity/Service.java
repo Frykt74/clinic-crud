@@ -1,7 +1,9 @@
 package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "service")
 public class Service {
@@ -19,28 +21,4 @@ public class Service {
 
     @Column(name = "price")
     private Double price;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public Long getIdService() {
-        return idService;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
 }

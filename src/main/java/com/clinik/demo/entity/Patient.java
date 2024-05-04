@@ -1,7 +1,9 @@
 package com.clinik.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "patient")
 public class Patient {
@@ -28,52 +30,4 @@ public class Patient {
 
     @Column(name = "snils", columnDefinition = "bigint")
     private Long snils;
-
-    public void setPolicy(Long policy) {
-        this.policy = policy;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setSocialCategories(String socialCategories) {
-        this.socialCategories = socialCategories;
-    }
-
-    public void setSnils(Long snils) {
-        this.snils = snils;
-    }
-
-    public Long getIdMedicalCard() {
-        return idMedicalCard;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public Long getPolicy() {
-        return policy;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public Long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getSocialCategories() {
-        return socialCategories;
-    }
-
-    public Long getSnils() {
-        return snils;
-    }
 }
