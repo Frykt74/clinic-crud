@@ -18,7 +18,7 @@ public class MedicalCardService {
     }
 
     public MedicalCard findCardById(Long id) {
-        return medicalCardRepository.findById(id).orElse(null);
+        return medicalCardRepository.findById(id);
     }
 
     public List<MedicalCard> findAllCards() {

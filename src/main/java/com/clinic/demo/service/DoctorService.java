@@ -18,7 +18,7 @@ public class DoctorService {
     }
 
     public Doctor findDoctorById(Long id) {
-        return doctorRepository.findById(id).orElse(null);
+        return doctorRepository.findById(id);
     }
 
     public List<Doctor> findAllDoctors() {

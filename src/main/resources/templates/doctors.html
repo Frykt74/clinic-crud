@@ -27,13 +27,13 @@
         </thead>
         <tbody>
         <tr th:each="doctor : ${doctors}">
-            <td th:text="${doctor.getIdEmployee()}"></td>
-            <td th:text="${doctor.getPerson().getLastName()}"></td>
-            <td th:text="${doctor.getPerson().getFirstName()}"></td>
-            <td th:text="${doctor.getPerson().getPatronymic()}"></td>
-            <td th:text="${doctor.getProfile()}"></td>
-            <td th:text="${doctor.getSpecialty()}"></td>
-            <td th:text="${doctor.getEmploymentDate()}"></td>
+            <td th:text="${doctor.idEmployee}"></td>
+            <td th:text="${doctor.person.lastName}"></td>
+            <td th:text="${doctor.person.firstName}"></td>
+            <td th:text="${doctor.person.patronymic}"></td>
+            <td th:text="${doctor.profile}"></td>
+            <td th:text="${doctor.specialty}"></td>
+            <td th:text="${#dates.format(doctor.employmentDate, 'dd.MM.yyyy')}"></td>
         </tr>
         </tbody>
     </table>
