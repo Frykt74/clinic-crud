@@ -1,11 +1,13 @@
 package com.clinic.demo.repository;
 
 import com.clinic.demo.entity.Doctor;
+import com.clinic.demo.entity.Service;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -52,6 +54,15 @@ public class DoctorRepository {
             Doctor doctor = session.load(Doctor.class, id);
             session.delete(doctor);
             session.getTransaction().commit();
+        }
+    }
+
+    public List<Doctor> findAllDoctorsByService(Service service) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT d.* FROM doctor d JOIN service s ON d.id_employee = s.id_employee WHERE s.id_service = :serviceId";
+            NativeQuery<Doctor> query = session.createNativeQuery(queryString, Doctor.class);
+            query.setParameter("serviceId", service.getIdService());
+            return query.getResultList();
         }
     }
 }

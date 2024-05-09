@@ -32,4 +32,8 @@ public class DoctorService {
     public void deleteDoctorById(Long id) {
         doctorRepository.deleteById(id);
     }
+
+    public List<Doctor> findAllDoctorsByService(Service service) {
+        return doctorRepository.findAllDoctorsByService(service);
+    }
 }

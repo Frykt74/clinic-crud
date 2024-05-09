@@ -28,7 +28,12 @@
                 <td th:text="${service.doctor.profile}"></td>
                 <td th:text="${service.doctor.specialty}"></td>
                 <td th:text="${service.price}"></td>
-
+                <td>
+                    <form action="/services/appointment-service" method="GET">
+                        <input type="hidden" name="serviceId" th:value="${service.idService}"/>
+                        <button type="submit" class="btn btn-primary">Записаться</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

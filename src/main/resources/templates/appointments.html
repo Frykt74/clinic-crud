@@ -15,7 +15,7 @@
     <h1>Запись на приём</h1>
     <a th:href="@{/appointments/new}" class="btn btn-primary btn-sm mb-3">Добавить запись</a>
 
-    <table border="1" class = "table table-striped table-responsive-md">
+    <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
             <th>Врач</th>
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr th:each="appointment : ${appointments}">
-<!--            TODO: инициалы-->
+            <!--            TODO: инициалы-->
             <td th:text="${appointment.getEmployee().getPerson().getLastName()}"></td>
             <td th:text="${appointment.getEmployee().getCabinet()}"></td>
             <td th:text="${appointment.getService().getName()}"></td>
