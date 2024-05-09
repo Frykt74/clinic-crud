@@ -19,7 +19,7 @@ public class PersonService {
 
     public Person findPersonById(Long id) {
         return personRepository.findPersonById(id);
-    };
+    }
 
     public List<Person> findAllPeople() {
         return personRepository.findAllPeople();

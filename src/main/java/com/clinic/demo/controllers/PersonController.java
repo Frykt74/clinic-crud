@@ -1,12 +1,15 @@
 package com.clinic.demo.controllers;
 
 import com.clinic.demo.entity.Person;
+import com.clinic.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.clinic.demo.service.PersonService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -37,7 +40,7 @@ public class PersonController {
 
     // Сохранить новую персону
     @PostMapping("/save")
-    public String savePerson(@ModelAttribute("person") @DateTimeFormat(pattern="dd.MM.yyyy") Person person) {
+    public String savePerson(@ModelAttribute("person") @DateTimeFormat(pattern = "dd.MM.yyyy") Person person) {
         personService.savePerson(person);
         return "redirect:/people";
     }

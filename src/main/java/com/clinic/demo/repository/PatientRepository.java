@@ -53,4 +53,15 @@ public class PatientRepository {
             session.getTransaction().commit();
         }
     }
+
+    public List<Patient> findPatientByLastName(String lastName) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT p.* FROM patient p " +
+                    "INNER JOIN person ps ON p.id_person = ps.id_person " +
+                    "WHERE ps.last_name LIKE :lastName";
+            return session.createNativeQuery(queryString, Patient.class)
+                    .setParameter("lastName", "%" + lastName + "%")
+                    .getResultList();
+        }
+    }
 }

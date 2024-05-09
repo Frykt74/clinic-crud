@@ -22,7 +22,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "id_service")
-    private Service service;
+    private Favor favor;
 
     @ManyToOne
     @JoinColumn(name = "id_employee")

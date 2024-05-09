@@ -1,6 +1,6 @@
 package com.clinic.demo.repository;
 
-import com.clinic.demo.entity.Service;
+import com.clinic.demo.entity.Favor;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -12,36 +12,36 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ServiceRepository {
+public class FavorRepository {
 
     private final SessionFactory sessionFactory;
 
-    public ServiceRepository(SessionFactory sessionFactory) {
+    public FavorRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public Optional<Service> findById(Long id) {
+    public Optional<Favor> findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return Optional.ofNullable(session.get(Service.class, id));
+            return Optional.ofNullable(session.get(Favor.class, id));
         }
     }
 
-    public List<Service> findAll() {
+    public List<Favor> findAll() {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Service> criteriaQuery = builder.createQuery(Service.class);
-            Root<Service> root = criteriaQuery.from(Service.class);
+            CriteriaQuery<Favor> criteriaQuery = builder.createQuery(Favor.class);
+            Root<Favor> root = criteriaQuery.from(Favor.class);
             criteriaQuery.select(root);
             return session.createQuery(criteriaQuery).getResultList();
         }
     }
 
-    public Service save(Service service) {
+    public Favor save(Favor favor) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(service);
+            session.save(favor);
             session.getTransaction().commit();
-            return service;
+            return favor;
         }
     }
 
@@ -49,19 +49,19 @@ public class ServiceRepository {
     public void deleteById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Service service = session.get(Service.class, id);
-            if (service != null) {
-                session.delete(service);
+            Favor favor = session.get(Favor.class, id);
+            if (favor != null) {
+                session.delete(favor);
             }
             session.getTransaction().commit();
         }
     }
 
-    public List<Service> findAllByName(String name) {
+    public List<Favor> findAllByName(String name) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Service> criteriaQuery = builder.createQuery(Service.class);
-            Root<Service> root = criteriaQuery.from(Service.class);
+            CriteriaQuery<Favor> criteriaQuery = builder.createQuery(Favor.class);
+            Root<Favor> root = criteriaQuery.from(Favor.class);
             criteriaQuery.select(root).where(builder.equal(root.get("name"), name));
             return session.createQuery(criteriaQuery).getResultList();
         }

@@ -1,7 +1,7 @@
 package com.clinic.demo.service;
 
-import com.clinic.demo.repository.DoctorRepository;
 import com.clinic.demo.entity.Doctor;
+import com.clinic.demo.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class DoctorService {
         doctorRepository.deleteById(id);
     }
 
-    public List<Doctor> findAllDoctorsByService(Service service) {
-        return doctorRepository.findAllDoctorsByService(service);
-    }
+//    public List<Doctor> findAllDoctorsByService(Favor service) {
+//        return doctorRepository.findAllDoctorsByService(service);
+//    }
 }

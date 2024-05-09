@@ -31,7 +31,7 @@
             <!--            TODO: инициалы-->
             <td th:text="${appointment.getEmployee().getPerson().getLastName()}"></td>
             <td th:text="${appointment.getEmployee().getCabinet()}"></td>
-            <td th:text="${appointment.getService().getName()}"></td>
+            <td th:text="${appointment.getFavor().getName()}"></td>
             <td th:text="${appointment.getPatient().getPerson().getLastName()}"></td>
             <td th:text="${appointment.getAppointmentDate()}"></td>
             <td th:text="${appointment.getAppointmentTime()}"></td>

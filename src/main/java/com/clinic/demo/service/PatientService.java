@@ -32,4 +32,8 @@ public class PatientService {
     public void deleteById(Long id) {
         patientRepository.deleteById(id);
     }
+
+    public List<Patient> findPatientByLastName(String lastName) {
+        return patientRepository.findPatientByLastName(lastName);
+    }
 }
