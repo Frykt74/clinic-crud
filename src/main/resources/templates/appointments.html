@@ -28,13 +28,14 @@
         </thead>
         <tbody>
         <tr th:each="appointment : ${appointments}">
-            <!--            TODO: инициалы-->
-            <td th:text="${appointment.getEmployee().getPerson().getLastName()}"></td>
-            <td th:text="${appointment.getEmployee().getCabinet()}"></td>
-            <td th:text="${appointment.getFavor().getName()}"></td>
-            <td th:text="${appointment.getPatient().getPerson().getLastName()}"></td>
-            <td th:text="${appointment.getAppointmentDate()}"></td>
-            <td th:text="${appointment.getAppointmentTime()}"></td>
+            <td th:text="${appointment.favor.doctor.person.lastName + ' ' + appointment.favor.doctor.person.firstName.substring(0,1) +
+                '. ' + appointment.favor.doctor.person.patronymic.substring(0,1) + '.'}"></td>
+            <td th:text="${appointment.employee.cabinet}"></td>
+            <td th:text="${appointment.favor.name}"></td>
+            <td th:text="${appointment.patient.person.lastName + ' ' + appointment.patient.person.firstName.substring(0,1) +
+                '. ' + appointment.patient.person.patronymic.substring(0,1) + '.'}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.appointmentTime}"></td>
         </tr>
         </tbody>
     </table>

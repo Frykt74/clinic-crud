@@ -29,10 +29,7 @@
                 <td th:text="${patient.person.patronymic}"></td>
                 <td th:text="${patient.phoneNumber}"></td>
                 <td>
-                    <form action="/patients//add-appointment" method="GET">
-                        <input type="hidden" name="serviceId" th:value="${favor.idService}"/>
-                        <button type="submit" class="btn btn-primary">Записать</button>
-                    </form>
+                    <a th:href="@{/appointments/time(serviceId=${favor.idService}, idMedicalCard=${patient.idMedicalCard})}" class="btn btn-primary btn-sm mb-3">Записать</a>
                 </td>
             </tr>
             </tbody>

@@ -10,6 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new StringToDateConverter("dd.MM.yyyy"));
+        registry.addConverter(new StringToTimeConverter());
     }
 }
 

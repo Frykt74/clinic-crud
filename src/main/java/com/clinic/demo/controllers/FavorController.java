@@ -27,7 +27,7 @@ public class FavorController {
     @GetMapping("")
     public String showAllServices(Model model) {
         List<Favor> favors = favorService.findAllServices();
-        model.addAttribute("services", favors);
+        model.addAttribute("favors", favors);
         return "services";
     }
 

@@ -26,10 +26,9 @@
         </thead>
         <tbody>
         <tr th:each="favor : ${favors}">
-            <td th:text="${favor.getIdService()}"></td>
-            <td th:text="${favor.getName()}"></td>
-            <!--            TODO: руб-->
-            <td th:text="${favor.getPrice()}">руб.</td>
+            <td th:text="${favor.idService}"></td>
+            <td th:text="${favor.name}"></td>
+            <td th:text="${favor.price + ' руб.'}"></td>
 
         </tr>
         </tbody>
