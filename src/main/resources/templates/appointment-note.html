@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment</title>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Запись приёма</h1>
+    <form th:action="@{/medical-cards/patient}" method="post">
+    <div class="form-group">
+            <label for="complaint">Жалобы:</label>
+            <input type="text" id="complaint" name="complaint" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="examination">Обследование:</label>
+            <input type="text" id="examination" name="examination" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="certificate">Справка:</label>
+            <input type="text" id="certificate" name="certificate" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="discharge">Выписка:</label>
+            <input type="text" id="discharge" name="discharge" class="form-control">
+        </div>
+        <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+        <input type="submit" value="Сохранить" class="btn btn-primary">
+    </form>
+</div>
+
+</body>

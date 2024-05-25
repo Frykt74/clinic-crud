@@ -75,6 +75,13 @@ public class AppointmentController {
         return "add-appointment";
     }
 
+    @PostMapping("/patient-appointments")
+    public String getPatientAppointments(@RequestParam Long idMedicalCard, Model model) {
+        List<Appointment> appointments = appointmentService.getAppointmentsByMedicalCardId(idMedicalCard);
+        model.addAttribute("appointments", appointments);
+        return "patient-appointments";
+    }
+
 
 //    @GetMapping("/add-appointment")
 //    public String showAddAppointmentForm(@RequestParam("serviceId") Long serviceId, @RequestParam("idMedicalCard") Long idMedicalCard, Model model) {

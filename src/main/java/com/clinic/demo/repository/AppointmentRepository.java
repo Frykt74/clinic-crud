@@ -54,4 +54,13 @@ public class AppointmentRepository {
             session.getTransaction().commit();
         }
     }
+
+    public List<Appointment> getAppointmentsByMedicalCardId(Long idMedicalCard) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT a FROM Appointment a WHERE a.patient.idMedicalCard = :idMedicalCard";
+            return session.createQuery(queryString, Appointment.class)
+                    .setParameter("idMedicalCard", idMedicalCard)
+                    .getResultList();
+        }
+    }
 }
