@@ -85,4 +85,12 @@ public class PatientRepository {
         }
     }
 
+    public List<Patient> findPatientsByPhoneNumber(Long phoneNumber) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT * FROM patient WHERE phone_number = :phoneNumber";
+            return session.createNativeQuery(queryString, Patient.class)
+                    .setParameter("phoneNumber", phoneNumber)
+                    .getResultList();
+        }
+    }
 }

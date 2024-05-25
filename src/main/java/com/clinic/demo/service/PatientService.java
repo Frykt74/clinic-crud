@@ -45,4 +45,8 @@ public class PatientService {
         return patientRepository.findPatientByFirstName(firstName);
     }
 
+    public List<Patient> findPatientByPhone(String phone) {
+        Long phoneNumber = Long.parseLong(phone);
+        return patientRepository.findPatientsByPhoneNumber(phoneNumber);
+    }
 }

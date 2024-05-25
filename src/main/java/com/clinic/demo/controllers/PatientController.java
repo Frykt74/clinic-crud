@@ -58,6 +58,16 @@ public class PatientController {
         return "search-patient";
     }
 
+    @GetMapping("/search-by-phone")
+    public String searchByPhone(@RequestParam("keyword") String keyword,
+                               @RequestParam("serviceId") Long serviceId,
+                               Model model) {
+        List<Patient> patients = patientService.findPatientByPhone(keyword);
+        model.addAttribute("patients", patients);
+        Favor favor = favorService.findById(serviceId);
+        model.addAttribute("favor", favor);
+        return "search-patient";
+    }
 
     @GetMapping("/search-for-doctor")
     public String showSearchForm() {
