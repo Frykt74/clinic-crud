@@ -47,6 +47,18 @@ public class PatientController {
         return "search-patient";
     }
 
+    @GetMapping("/search-by-first-name")
+    public String searchByName(@RequestParam("keyword") String keyword,
+                         @RequestParam("serviceId") Long serviceId,
+                         Model model) {
+        List<Patient> patients = patientService.findPatientByFirstName(keyword);
+        model.addAttribute("patients", patients);
+        Favor favor = favorService.findById(serviceId);
+        model.addAttribute("favor", favor);
+        return "search-patient";
+    }
+
+
     @GetMapping("/search-for-doctor")
     public String showSearchForm() {
         return "patient-search-for-doctor";
@@ -59,42 +71,13 @@ public class PatientController {
         return "result-patient-search-for-doc";
     }
 
-    //    @GetMapping("/search-for-doctor")
-//    public String searchForDoc(@RequestParam("keyword") String keyword, Model model) {
-//        List<Patient> patients = patientService.findPatientByLastName(keyword);
-//        model.addAttribute("patients", patients);
-//        return "patient-search-for-doctor";
-//    }
-//    @GetMapping("/search-for-doctor")
-//    public ModelAndView searchForDoc(@RequestParam String keyword) {
-//        List<Patient> patients = patientService.findPatientByLastName(keyword);
-//        ModelAndView mav = new ModelAndView("result-patient-search-for-doc");
-//        mav.addObject("patients", patients);
-//        return mav;
-//    }
-//    @GetMapping("/search-for-doctor")
-//    public ModelAndView searchForDoc(@RequestParam(required = false) String keyword) {
-//        List<Patient> patients = new ArrayList<>();
-//        if (keyword != null) {
-//            patients = patientService.findPatientByLastName(keyword);
-//        }
-//        ModelAndView mav = new ModelAndView("result-patient-search-for-doc");
-//        mav.addObject("patients", patients);
-//        return mav;
-//    }
 
-//    @GetMapping("/search-for-doctor")
-//    public ModelAndView searchForDoc(@RequestParam(required = false) String keyword) {
-//        List<Patient> patients = new ArrayList<>();
-//        if (keyword != null) {
-//            patients = patientService.findPatientByLastName(keyword);
-//        }
-//        ModelAndView mav = new ModelAndView("patient-search-for-doctor");
-//        mav.addObject("patients", patients);
-//        return mav;
-//    }
-
-
+    @PostMapping("/search-by-id-medical-card")
+    public String searchByIdMedicalCard(@RequestParam Long idMedicalCard, Model model) {
+        List<Patient> patients = patientService.findPatientByIdMedicalCard(idMedicalCard);
+        model.addAttribute("patients", patients);
+        return "result-patient-search-for-doc";
+    }
 
     @GetMapping("/add-appointment")
     public String addAppointment(@RequestParam("idMedicalCard") Long idMedicalCard, Model model) {

@@ -64,4 +64,25 @@ public class PatientRepository {
                     .getResultList();
         }
     }
+
+    public List<Patient> findPatientsByIdMedicalCard(Long idMedicalCard) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT * FROM patient WHERE id_medical_card = :idMedicalCard";
+            return session.createNativeQuery(queryString, Patient.class)
+                    .setParameter("idMedicalCard", idMedicalCard)
+                    .getResultList();
+        }
+    }
+
+    public List<Patient> findPatientByFirstName(String firstName) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT p.* FROM patient p " +
+                    "INNER JOIN person ps ON p.id_person = ps.id_person " +
+                    "WHERE ps.first_name LIKE :firstName";
+            return session.createNativeQuery(queryString, Patient.class)
+                    .setParameter("firstName", "%" + firstName + "%")
+                    .getResultList();
+        }
+    }
+
 }

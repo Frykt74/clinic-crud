@@ -36,4 +36,13 @@ public class PatientService {
     public List<Patient> findPatientByLastName(String lastName) {
         return patientRepository.findPatientByLastName(lastName);
     }
+
+    public List<Patient> findPatientByIdMedicalCard(Long idMedicalCard) {
+        return patientRepository.findPatientsByIdMedicalCard(idMedicalCard);
+    }
+
+    public List<Patient> findPatientByFirstName(String firstName) {
+        return patientRepository.findPatientByFirstName(firstName);
+    }
+
 }

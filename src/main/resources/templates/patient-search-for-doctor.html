@@ -19,6 +19,14 @@
         <button type="submit" class="btn btn-primary">Поиск пациента</button>
     </form>
     <hr>
+    <form action="/patients/search-by-id-medical-card" method="POST">
+        <div class="form-group">
+            <label for="idMedicalCard">Введите номер медицинской карты:</label>
+            <input type="text" id="idMedicalCard" name="idMedicalCard" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Поиск пациента</button>
+    </form>
+
     <!--    TODO redirect for doctor-->
     <!--    <a th:href="@{/appointments}">Отмена</a>-->
 </div>
