@@ -82,6 +82,12 @@ public class AppointmentController {
         return "patient-appointments";
     }
 
+    @PostMapping("/delete")
+    public String deleteAppointment(@RequestParam("appointmentId") Long appointmentId) {
+        appointmentService.deleteAppointmentById(appointmentId);
+        return "redirect:/appointments";
+    }
+
 
 //    @GetMapping("/add-appointment")
 //    public String showAddAppointmentForm(@RequestParam("serviceId") Long serviceId, @RequestParam("idMedicalCard") Long idMedicalCard, Model model) {

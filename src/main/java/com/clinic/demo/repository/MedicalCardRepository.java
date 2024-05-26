@@ -47,12 +47,14 @@ public class MedicalCardRepository {
         }
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Long medicalCardId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            MedicalCard medicalCard = session.load(MedicalCard.class, id);
-            session.delete(medicalCard);
+
+            MedicalCard medicalCard = session.get(MedicalCard.class, medicalCardId);
+            session.remove(medicalCard);
             session.getTransaction().commit();
         }
     }
+
 }

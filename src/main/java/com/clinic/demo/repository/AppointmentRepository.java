@@ -1,14 +1,18 @@
 package com.clinic.demo.repository;
 
 import com.clinic.demo.entity.Appointment;
+import com.clinic.demo.entity.MedicalCard;
+import com.clinic.demo.service.MedicalCardService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +20,12 @@ import java.util.Optional;
 public class AppointmentRepository {
 
     private final SessionFactory sessionFactory;
+    private final MedicalCardService medicalCardService;
 
     @Autowired
-    public AppointmentRepository(SessionFactory sessionFactory) {
+    public AppointmentRepository(SessionFactory sessionFactory, MedicalCardService medicalCardService) {
         this.sessionFactory = sessionFactory;
+        this.medicalCardService = medicalCardService;
     }
 
     public Optional<Appointment> findById(Long id) {
@@ -41,19 +47,37 @@ public class AppointmentRepository {
     public void save(Appointment appointment) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.saveOrUpdate(appointment);
+            session.persist(appointment);
             session.getTransaction().commit();
         }
     }
 
-    public void deleteById(Long id) {
+//    public void deleteById(Long id) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            Appointment appointment = session.get(Appointment.class, id);
+//            session.remove(appointment);
+//            session.getTransaction().commit();
+//        }
+//    }
+
+    public void deleteById(Long appointmentId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Appointment appointment = session.load(Appointment.class, id);
-            session.delete(appointment);
+
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            Long idMedicalCard = appointment.getPatient().getIdMedicalCard();
+            if (idMedicalCard != null) {
+                medicalCardService.deleteCardById(idMedicalCard);
+            }
+            session.remove(appointment);
+
             session.getTransaction().commit();
         }
     }
+
+
+
 
     public List<Appointment> getAppointmentsByMedicalCardId(Long idMedicalCard) {
         try (Session session = sessionFactory.openSession()) {
@@ -63,4 +87,17 @@ public class AppointmentRepository {
                     .getResultList();
         }
     }
+
+    public void editAppointmentDate(Long idAppointment, Date newDate) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
+
+            Appointment appointment = session.get(Appointment.class, idAppointment);
+            appointment.setAppointmentDate(newDate);
+
+            session.persist(appointment);
+            tx.commit();
+        }
+    }
+
 }

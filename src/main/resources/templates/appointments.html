@@ -24,6 +24,8 @@
             <th>Пациент</th>
             <th>Дата</th>
             <th>Время</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +38,18 @@
                 '. ' + appointment.patient.person.patronymic.substring(0,1) + '.'}"></td>
             <td th:text="${#dates.format(appointment.appointmentDate, 'dd.MM.yyyy')}"></td>
             <td th:text="${#dates.format(appointment.appointmentTime, 'HH:mm')}"></td>
+            <td>
+                <form th:action="@{/appointments/edit-date}" method="post">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+                    <button type="submit" class="btn btn-success">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/appointments/delete}" method="post">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

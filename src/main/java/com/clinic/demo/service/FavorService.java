@@ -36,4 +36,8 @@ public class FavorService {
     public List<Favor> findServicesByName(String name) {
         return favorRepository.findAllByName(name);
     }
+
+    public List<Favor> findServicesByDoctor(String lastName) {
+        return favorRepository.findFavorByDoctorsLastName(lastName);
+    }
 }

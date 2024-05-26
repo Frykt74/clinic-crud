@@ -5,6 +5,7 @@ import com.clinic.demo.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -35,5 +36,9 @@ public class AppointmentService {
 
     public List<Appointment> getAppointmentsByMedicalCardId(Long medicalCardId) {
        return appointmentRepository.getAppointmentsByMedicalCardId(medicalCardId);
+    }
+
+    public void editAppointmentDate(Long idAppointment, Date newDate) {
+        appointmentRepository.editAppointmentDate(idAppointment, newDate);
     }
 }

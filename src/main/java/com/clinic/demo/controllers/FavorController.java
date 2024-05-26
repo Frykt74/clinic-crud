@@ -52,6 +52,14 @@ public class FavorController {
         return mav;
     }
 
+    @GetMapping("/search-by-doctor")
+    public ModelAndView searchByDoctor(@RequestParam String keyword) {
+        List<Favor> favors = favorService.findServicesByDoctor(keyword);
+        ModelAndView mav = new ModelAndView("search-service");
+        mav.addObject("favors", favors);
+        return mav;
+    }
+
     @GetMapping("/appointment-favor")
     public String addAppointment(@RequestParam("serviceId") Long serviceId, Model model) {
         Favor favor = favorService.findById(serviceId);

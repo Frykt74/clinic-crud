@@ -1,6 +1,8 @@
 package com.clinic.demo.repository;
 
+import com.clinic.demo.entity.Doctor;
 import com.clinic.demo.entity.Favor;
+import com.clinic.demo.entity.Patient;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -64,6 +66,19 @@ public class FavorRepository {
             Root<Favor> root = criteriaQuery.from(Favor.class);
             criteriaQuery.select(root).where(builder.equal(root.get("name"), name));
             return session.createQuery(criteriaQuery).getResultList();
+        }
+    }
+
+    public List<Favor> findFavorByDoctorsLastName(String lastName) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT s.* " +
+                    "FROM service s " +
+                    "INNER JOIN doctor d ON s.id_employee = d.id_employee " +
+                    "INNER JOIN person p ON d.id_person = p.id_person " +
+                    "WHERE p.last_name LIKE :lastName";
+            return session.createNativeQuery(queryString, Favor.class)
+                    .setParameter("lastName", "%" + lastName + "%")
+                    .getResultList();
         }
     }
 }
