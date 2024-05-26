@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Service
@@ -38,7 +39,11 @@ public class AppointmentService {
         return appointmentRepository.getAppointmentsByMedicalCardId(medicalCardId);
     }
 
-    public void editAppointmentDate(Long idAppointment, Date newDate) {
-        appointmentRepository.editAppointmentDate(idAppointment, newDate);
+    public void updateAppointmentDateAndTime(Long appointmentId, Date appointmentDate, Time appointmentTime) {
+        appointmentRepository.updateAppointmentDateAndTime(appointmentId, appointmentDate, appointmentTime);
+    }
+
+    public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
+        appointmentRepository.updateAppointmentPatient(appointmentId, idMedicalCard);
     }
 }

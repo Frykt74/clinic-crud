@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            width: 200px;
+            height: 60px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-1 mb-5">Ваша роль в системе</h1>
+        <form action="patients/search-for-doctor" method="GET">
+            <button type="submit" class="btn btn-primary mb-3">Врач</button>
+        </form>
+        <form action="/appointments" method="GET">
+            <button type="submit" class="btn btn-primary">Регистратор</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

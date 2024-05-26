@@ -90,6 +90,27 @@ public class AppointmentController {
         return "redirect:/appointments";
     }
 
+    @GetMapping("/edit")
+    public String showEditAppointmentForm(@RequestParam("appointmentId") Long appointmentId, Model model) {
+        Appointment appointment = appointmentService.findAppointmentById(appointmentId);
+        model.addAttribute("appointment", appointment);
+        return "edit-appointment";
+    }
+
+    @PostMapping("/update")
+    public String updateAppointment(@RequestParam("appointmentId") Long appointmentId,
+                                    @RequestParam("appointmentDate") Date appointmentDate,
+                                    @RequestParam("appointmentTime") Time appointmentTime) {
+        appointmentService.updateAppointmentDateAndTime(appointmentId, appointmentDate, appointmentTime);
+        return "redirect:/appointments";
+    }
+
+    @PostMapping("/update-patient")
+    public String updateAppointmentPatient(@RequestParam("appointmentId") Long appointmentId,
+                                           @RequestParam("idMedicalCard") Long idMedicalCard) {
+        appointmentService.updateAppointmentPatient(appointmentId, idMedicalCard);
+        return "redirect:/appointments";
+    }
 
 //    @GetMapping("/add-appointment")
 //    public String showAddAppointmentForm(@RequestParam("serviceId") Long serviceId, @RequestParam("idMedicalCard") Long idMedicalCard, Model model) {

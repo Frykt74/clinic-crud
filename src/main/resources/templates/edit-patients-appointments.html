@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <title>Search favor</title>
+</head>
+<body>
+<div class="container my-2">
+    <h1>Результаты поиска</h1>
+
+    <div th:if="${patients != null}">
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Мобильный телефон</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.person.lastName}"></td>
+                <td th:text="${patient.person.firstName}"></td>
+                <td th:text="${patient.person.patronymic}"></td>
+                <td th:text="${patient.phoneNumber}"></td>
+                <td>
+                    <form action="/appointments/update-patient" method="POST">
+                        <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}"/>
+                        <input type="hidden" name="idMedicalCard" th:value="${patient.idMedicalCard}"/>
+                        <button type="submit" class="btn btn-primary btn-sm mb-3">Изменить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${patients == null}">
+        <p>No patients found</p>
+    </div>
+</div>
+</body>
+</html>

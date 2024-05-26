@@ -2,6 +2,7 @@ package com.clinic.demo.repository;
 
 import com.clinic.demo.entity.Appointment;
 import com.clinic.demo.entity.MedicalCard;
+import com.clinic.demo.entity.Patient;
 import com.clinic.demo.service.MedicalCardService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,6 +120,28 @@ public class AppointmentRepository {
 
             session.persist(appointment);
             tx.commit();
+        }
+    }
+
+    public void updateAppointmentDateAndTime(Long appointmentId, Date appointmentDate, Time appointmentTime) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            appointment.setAppointmentDate(appointmentDate);
+            appointment.setAppointmentTime(appointmentTime);
+            session.persist(appointment);
+            session.getTransaction().commit();
+        }
+    }
+
+    public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            Patient patient = session.get(Patient.class, idMedicalCard);
+            appointment.setPatient(patient);
+            session.persist(appointment);
+            session.getTransaction().commit();
         }
     }
 }

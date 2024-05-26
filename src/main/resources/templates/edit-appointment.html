@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать приём</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container my-4">
+    <h1 class="mb-4">Редактирование</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Изменить пациента</h2>
+            <form action="/patients/search-for-edit" method="GET">
+                <div class="form-group">
+                    <label for="keyword">Введите фамилию пациента:</label>
+                    <input type="text" id="keyword" name="keyword" th:value="${appointment.patient.person.lastName}"
+                           class="form-control">
+                    <input type="hidden" id="appointmentId" name="appointmentId"
+                           th:value="${appointment.idAppointment}"/>
+                </div>
+                <input type="hidden" name="serviceId" th:value="${appointment.favor.idService}"/>
+                <button type="submit" class="btn btn-primary">Изменить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Редактировать дату и время приёма</h2>
+            <form th:action="@{/appointments/update}" method="post">
+                <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+
+                <div class="form-group">
+                    <label for="appointmentDate">Дата приёма:</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate"
+                           th:value="${#dates.format(appointment.appointmentDate, 'yyyy-MM-dd')}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="appointmentTime">Время приёма:</label>
+                    <input type="time" id="appointmentTime" name="appointmentTime"
+                           th:value="${appointment.appointmentTime}" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

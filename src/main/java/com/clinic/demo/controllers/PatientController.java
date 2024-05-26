@@ -1,7 +1,9 @@
 package com.clinic.demo.controllers;
 
+import com.clinic.demo.entity.Appointment;
 import com.clinic.demo.entity.Favor;
 import com.clinic.demo.entity.Patient;
+import com.clinic.demo.service.AppointmentService;
 import com.clinic.demo.service.FavorService;
 import com.clinic.demo.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,13 @@ public class PatientController {
 
     private final PatientService patientService;
     private final FavorService favorService;
+    private final AppointmentService appointmentService;
 
     @Autowired
-    public PatientController(PatientService patientService, FavorService favorService) {
+    public PatientController(PatientService patientService, FavorService favorService, AppointmentService appointmentService) {
         this.patientService = patientService;
         this.favorService = favorService;
+        this.appointmentService = appointmentService;
     }
 
     @GetMapping("")
@@ -43,6 +47,29 @@ public class PatientController {
         Favor favor = favorService.findById(serviceId);
         model.addAttribute("favor", favor);
         return "search-patient";
+    }
+
+    @GetMapping("/search-for-edit")
+    public String searchPatientForEdit(@RequestParam("keyword") String keyword,
+                                       @RequestParam("serviceId") Long serviceId,
+                                       @RequestParam("appointmentId") Long appointmentId,
+                                       Model model) {
+        List<Patient> patients = patientService.findPatientByLastName(keyword);
+        model.addAttribute("patients", patients);
+        Favor favor = favorService.findById(serviceId);
+        model.addAttribute("favor", favor);
+        Appointment appointment = appointmentService.findAppointmentById(appointmentId);
+        model.addAttribute("appointment", appointment);
+        return "edit-patients-appointments";
+    }
+
+
+    @GetMapping("/edit")
+    public String selectPatientForAppointment(@RequestParam("serviceId") Long serviceId,
+                                              @RequestParam("appointmentId") Long appointmentId,
+                                              @RequestParam("idMedicalCard") Long idMedicalCard) {
+        appointmentService.updateAppointmentPatient(appointmentId, idMedicalCard);
+        return "redirect:/appointments/edit?appointmentId=" + appointmentId;
     }
 
     @GetMapping("/search-by-first-name")
