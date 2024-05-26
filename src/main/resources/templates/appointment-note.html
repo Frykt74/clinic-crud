@@ -28,10 +28,12 @@
             <textarea id="discharge" name="discharge" class="form-control form-control-lg" rows="4"></textarea>
         </div>
         <!-- Кнопка для сохранения -->
-        <button type="button" class="btn btn-primary my-4" onclick="saveAsTxt()">Напечатать выписку с рекомендациями и рецептом</button>
+        <button type="button" class="btn btn-primary my-4" onclick="saveAsTxt()">Напечатать выписку с рекомендациями и
+            рецептом
+        </button>
     </form>
-        <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
-        <input type="submit" value="Сохранить" class="btn btn-primary">
+    <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+    <input type="submit" value="Сохранить" class="btn btn-primary">
     </form>
 </div>
 
@@ -42,7 +44,7 @@
 <script>
     function saveAsTxt() {
         var dischargeContent = document.getElementById('discharge').value;
-        var blob = new Blob([dischargeContent], { type: 'text/plain' });
+        var blob = new Blob([dischargeContent], {type: 'text/plain'});
         var a = document.createElement('a');
         a.href = window.URL.createObjectURL(blob);
         a.download = 'discharge.txt';

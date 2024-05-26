@@ -35,7 +35,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> getAppointmentsByMedicalCardId(Long medicalCardId) {
-       return appointmentRepository.getAppointmentsByMedicalCardId(medicalCardId);
+        return appointmentRepository.getAppointmentsByMedicalCardId(medicalCardId);
     }
 
     public void editAppointmentDate(Long idAppointment, Date newDate) {

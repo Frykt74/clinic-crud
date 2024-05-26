@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "medical_card")
-
 public class MedicalCard {
 
     @Id

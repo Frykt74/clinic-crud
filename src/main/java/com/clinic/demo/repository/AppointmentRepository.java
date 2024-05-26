@@ -61,22 +61,43 @@ public class AppointmentRepository {
 //        }
 //    }
 
+//    public void deleteById(Long appointmentId) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//
+//            Appointment appointment = session.get(Appointment.class, appointmentId);
+//            if (appointment == null) {
+//                throw new IllegalArgumentException("Appointment not found with id: " + appointmentId);
+//            }
+//            MedicalCard medicalCard = medicalCardService.findCardByAppointmentId(appointmentId);
+//
+//            if (medicalCard != null) {
+//                medicalCardService.deleteCardById(medicalCard.getId());
+//            }
+//
+//            session.remove(appointment);
+//            session.getTransaction().commit();
+//        }
+//    }
+
     public void deleteById(Long appointmentId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
             Appointment appointment = session.get(Appointment.class, appointmentId);
-            Long idMedicalCard = appointment.getPatient().getIdMedicalCard();
-            if (idMedicalCard != null) {
-                medicalCardService.deleteCardById(idMedicalCard);
+            if (appointment == null) {
+                throw new IllegalArgumentException("Appointment not found with id: " + appointmentId);
             }
-            session.remove(appointment);
 
+            MedicalCard medicalCard = medicalCardService.findCardByAppointmentId(appointmentId);
+            if (medicalCard != null) {
+                medicalCardService.deleteCardById(medicalCard.getId());
+            }
+
+            session.remove(appointment);
             session.getTransaction().commit();
         }
     }
-
-
 
 
     public List<Appointment> getAppointmentsByMedicalCardId(Long idMedicalCard) {
@@ -99,5 +120,4 @@ public class AppointmentRepository {
             tx.commit();
         }
     }
-
 }

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,8 +47,8 @@ public class PatientController {
 
     @GetMapping("/search-by-first-name")
     public String searchByName(@RequestParam("keyword") String keyword,
-                         @RequestParam("serviceId") Long serviceId,
-                         Model model) {
+                               @RequestParam("serviceId") Long serviceId,
+                               Model model) {
         List<Patient> patients = patientService.findPatientByFirstName(keyword);
         model.addAttribute("patients", patients);
         Favor favor = favorService.findById(serviceId);
@@ -60,8 +58,8 @@ public class PatientController {
 
     @GetMapping("/search-by-phone")
     public String searchByPhone(@RequestParam("keyword") String keyword,
-                               @RequestParam("serviceId") Long serviceId,
-                               Model model) {
+                                @RequestParam("serviceId") Long serviceId,
+                                Model model) {
         List<Patient> patients = patientService.findPatientByPhone(keyword);
         model.addAttribute("patients", patients);
         Favor favor = favorService.findById(serviceId);

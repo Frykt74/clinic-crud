@@ -1,6 +1,8 @@
 package com.clinic.demo.controllers;
 
-import com.clinic.demo.entity.*;
+import com.clinic.demo.entity.Appointment;
+import com.clinic.demo.entity.Favor;
+import com.clinic.demo.entity.Patient;
 import com.clinic.demo.service.AppointmentService;
 import com.clinic.demo.service.FavorService;
 import com.clinic.demo.service.PatientService;

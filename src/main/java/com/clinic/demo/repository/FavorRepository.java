@@ -1,8 +1,6 @@
 package com.clinic.demo.repository;
 
-import com.clinic.demo.entity.Doctor;
 import com.clinic.demo.entity.Favor;
-import com.clinic.demo.entity.Patient;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;

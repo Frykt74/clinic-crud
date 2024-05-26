@@ -21,12 +21,16 @@ public class MedicalCardService {
         return medicalCardRepository.findById(id);
     }
 
+    public MedicalCard findCardByAppointmentId(Long appointmentId) {
+        return medicalCardRepository.findByAppointmentId(appointmentId);
+    }
+
     public List<MedicalCard> findAllCards() {
         return medicalCardRepository.findAll();
     }
 
-    public MedicalCard saveCard(MedicalCard medicalCard) {
-        return medicalCardRepository.save(medicalCard);
+    public void saveCard(MedicalCard medicalCard) {
+        medicalCardRepository.save(medicalCard);
     }
 
     public void deleteCardById(Long id) {

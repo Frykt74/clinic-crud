@@ -27,6 +27,12 @@ public class MedicalCardRepository {
         }
     }
 
+//    public MedicalCard findByAppointmentId(Long appointmentId) {
+//        try (Session session = sessionFactory.openSession()) {
+//            return session.get(MedicalCard.class, appointmentId);
+//        }
+//    }
+
     public List<MedicalCard> findAll() {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -47,12 +53,32 @@ public class MedicalCardRepository {
         }
     }
 
+//    public void deleteById(Long medicalCardId) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//
+//            MedicalCard medicalCard = session.get(MedicalCard.class, medicalCardId);
+//            session.remove(medicalCard);
+//            session.getTransaction().commit();
+//        }
+//    }
+
+    public MedicalCard findByAppointmentId(Long appointmentId) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM MedicalCard mc WHERE mc.appointment.idAppointment = :appointmentId";
+            return session.createQuery(hql, MedicalCard.class)
+                    .setParameter("appointmentId", appointmentId)
+                    .uniqueResult();
+        }
+    }
+
     public void deleteById(Long medicalCardId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-
             MedicalCard medicalCard = session.get(MedicalCard.class, medicalCardId);
-            session.remove(medicalCard);
+            if (medicalCard != null) {
+                session.remove(medicalCard);
+            }
             session.getTransaction().commit();
         }
     }

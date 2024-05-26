@@ -33,7 +33,8 @@
                 '. ' + appointment.patient.person.patronymic.substring(0,1) + '.'}"></td>
             <td th:text="${#dates.format(appointment.appointmentDate, 'dd.MM.yyyy')}"></td>
             <td th:text="${#dates.format(appointment.appointmentTime, 'HH:mm')}"></td>
-            <td><a th:href="@{'/medical-cards/patient?appointmentId=' + ${appointment.idAppointment}}" class="btn btn-primary">Перейти к карте</a></td>
+            <td><a th:href="@{'/medical-cards/patient?appointmentId=' + ${appointment.idAppointment}}"
+                   class="btn btn-primary">Перейти к карте</a></td>
         </tr>
         </tbody>
     </table>
