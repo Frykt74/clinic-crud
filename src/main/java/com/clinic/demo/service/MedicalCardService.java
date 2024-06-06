@@ -17,9 +17,9 @@ public class MedicalCardService {
         this.medicalCardRepository = medicalCardRepository;
     }
 
-    public MedicalCard findCardById(Long id) {
-        return medicalCardRepository.findById(id);
-    }
+//    public MedicalCard findCardById(Long id) {
+//        return medicalCardRepository.findById(id);
+//    }
 
     public MedicalCard findCardByAppointmentId(Long appointmentId) {
         return medicalCardRepository.findByAppointmentId(appointmentId);

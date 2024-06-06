@@ -29,9 +29,9 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
-    public void deleteById(Long id) {
-        patientRepository.deleteById(id);
-    }
+//    public void deleteById(Long id) {
+//        patientRepository.deleteById(id);
+//    }
 
     public List<Patient> findPatientByLastName(String lastName) {
         return patientRepository.findPatientByLastName(lastName);

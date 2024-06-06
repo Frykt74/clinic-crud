@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <title>Appointments-search</title>
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Запись на приём</h1>
+    <a th:href="@{/appointments/new}" class="btn btn-primary btn-sm mb-3">Добавить запись</a>
+
+    <!-- Форма поиска по фамилии врача -->
+    <form th:action="@{/appointments/searchDoctor}" method="get" class="form-inline mb-3">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="doctorLastName" class="sr-only">Фамилия врача</label>
+            <input type="text" class="form-control" id="doctorLastName" name="doctorLastName" placeholder="Фамилия врача">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Поиск по фамилии врача</button>
+    </form>
+
+    <!-- Форма поиска по фамилии пациента -->
+    <form th:action="@{/appointments/searchPatient}" method="get" class="form-inline mb-3">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="patientLastName" class="sr-only">Фамилия пациента</label>
+            <input type="text" class="form-control" id="patientLastName" name="patientLastName" placeholder="Фамилия пациента">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Поиск по фамилии пациента</button>
+    </form>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Врач</th>
+            <th>Кабинет</th>
+            <th>Услуга</th>
+            <th>Пациент</th>
+            <th>Дата</th>
+            <th>Время</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.favor.doctor.person.lastName + ' ' + appointment.favor.doctor.person.firstName.substring(0,1) +
+                '. ' + appointment.favor.doctor.person.patronymic.substring(0,1) + '.'}"></td>
+            <td th:text="${appointment.employee.cabinet}"></td>
+            <td th:text="${appointment.favor.name}"></td>
+            <td th:text="${appointment.patient.person.lastName + ' ' + appointment.patient.person.firstName.substring(0,1) +
+                '. ' + appointment.patient.person.patronymic.substring(0,1) + '.'}"></td>
+            <td th:text="${#dates.format(appointment.appointmentDate, 'dd.MM.yyyy')}"></td>
+            <td th:text="${#dates.format(appointment.appointmentTime, 'HH:mm')}"></td>
+            <td>
+                <form th:action="@{/appointments/edit}" method="get">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+                    <button type="submit" class="btn btn-success">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/appointments/delete}" method="post">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.idAppointment}">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

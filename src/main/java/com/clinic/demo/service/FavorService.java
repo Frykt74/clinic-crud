@@ -29,9 +29,9 @@ public class FavorService {
         return favorRepository.save(favor);
     }
 
-    public void delete(Long id) {
-        favorRepository.deleteById(id);
-    }
+//    public void delete(Long id) {
+//        favorRepository.deleteById(id);
+//    }
 
     public List<Favor> findServicesByName(String name) {
         return favorRepository.findAllByName(name);

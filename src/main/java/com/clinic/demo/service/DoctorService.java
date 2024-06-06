@@ -17,9 +17,9 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
-    public Doctor findDoctorById(Long id) {
-        return doctorRepository.findById(id);
-    }
+//    public Doctor findDoctorById(Long id) {
+//        return doctorRepository.findById(id);
+//    }
 
     public List<Doctor> findAllDoctors() {
         return doctorRepository.findAll();
@@ -29,9 +29,9 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
-    public void deleteDoctorById(Long id) {
-        doctorRepository.deleteById(id);
-    }
+//    public void deleteDoctorById(Long id) {
+//        doctorRepository.deleteById(id);
+//    }
 
 //    public List<Doctor> findAllDoctorsByService(Favor service) {
 //        return doctorRepository.findAllDoctorsByService(service);

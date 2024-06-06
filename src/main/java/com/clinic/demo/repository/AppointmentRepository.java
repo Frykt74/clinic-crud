@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,6 +54,78 @@ public class AppointmentRepository {
         }
     }
 
+    public void deleteById(Long appointmentId) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            if (appointment == null) {
+                throw new IllegalArgumentException("Appointment not found with id: " + appointmentId);
+            }
+
+            MedicalCard medicalCard = medicalCardService.findCardByAppointmentId(appointmentId);
+            if (medicalCard != null) {
+                medicalCardService.deleteCardById(medicalCard.getId());
+            }
+
+            session.remove(appointment);
+            session.getTransaction().commit();
+        }
+    }
+
+    public List<Appointment> getAppointmentsByMedicalCardId(Long idMedicalCard) {
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "SELECT a FROM Appointment a WHERE a.patient.idMedicalCard = :idMedicalCard";
+            return session.createQuery(queryString, Appointment.class)
+                    .setParameter("idMedicalCard", idMedicalCard)
+                    .getResultList();
+        }
+    }
+
+    public void updateAppointmentDateAndTime(Long appointmentId, Date appointmentDate, Time appointmentTime) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            appointment.setAppointmentDate(appointmentDate);
+            appointment.setAppointmentTime(appointmentTime);
+            session.persist(appointment);
+            session.getTransaction().commit();
+        }
+    }
+
+    public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Appointment appointment = session.get(Appointment.class, appointmentId);
+            Patient patient = session.get(Patient.class, idMedicalCard);
+            appointment.setPatient(patient);
+            session.persist(appointment);
+            session.getTransaction().commit();
+        }
+    }
+
+    public List<Appointment> findAppointmentsByDoctorLastName(String doctorLastName) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "SELECT a FROM Appointment a " +
+                "JOIN a.favor f " +
+                "JOIN f.doctor d " +
+                "JOIN d.person p " +
+                "WHERE p.lastName LIKE :doctorLastName";
+        Query<Appointment> query = session.createQuery(hql, Appointment.class);
+        query.setParameter("doctorLastName", "%" + doctorLastName + "%");
+        return query.getResultList();
+    }
+
+    public List<Appointment> findAppointmentsByPatientLastName(String patientLastName) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "SELECT a FROM Appointment a " +
+                "JOIN a.patient pt " +
+                "JOIN pt.person pp " +
+                "WHERE pp.lastName LIKE :patientLastName";
+        Query<Appointment> query = session.createQuery(hql, Appointment.class);
+        query.setParameter("patientLastName", "%" + patientLastName + "%");
+        return query.getResultList();
+    }
 //    public void deleteById(Long id) {
 //        try (Session session = sessionFactory.openSession()) {
 //            session.beginTransaction();
@@ -81,67 +153,15 @@ public class AppointmentRepository {
 //            session.getTransaction().commit();
 //        }
 //    }
-
-    public void deleteById(Long appointmentId) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-
-            Appointment appointment = session.get(Appointment.class, appointmentId);
-            if (appointment == null) {
-                throw new IllegalArgumentException("Appointment not found with id: " + appointmentId);
-            }
-
-            MedicalCard medicalCard = medicalCardService.findCardByAppointmentId(appointmentId);
-            if (medicalCard != null) {
-                medicalCardService.deleteCardById(medicalCard.getId());
-            }
-
-            session.remove(appointment);
-            session.getTransaction().commit();
-        }
-    }
-
-
-    public List<Appointment> getAppointmentsByMedicalCardId(Long idMedicalCard) {
-        try (Session session = sessionFactory.openSession()) {
-            String queryString = "SELECT a FROM Appointment a WHERE a.patient.idMedicalCard = :idMedicalCard";
-            return session.createQuery(queryString, Appointment.class)
-                    .setParameter("idMedicalCard", idMedicalCard)
-                    .getResultList();
-        }
-    }
-
-    public void editAppointmentDate(Long idAppointment, Date newDate) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
-
-            Appointment appointment = session.get(Appointment.class, idAppointment);
-            appointment.setAppointmentDate(newDate);
-
-            session.persist(appointment);
-            tx.commit();
-        }
-    }
-
-    public void updateAppointmentDateAndTime(Long appointmentId, Date appointmentDate, Time appointmentTime) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Appointment appointment = session.get(Appointment.class, appointmentId);
-            appointment.setAppointmentDate(appointmentDate);
-            appointment.setAppointmentTime(appointmentTime);
-            session.persist(appointment);
-            session.getTransaction().commit();
-        }
-    }
-
-    public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Appointment appointment = session.get(Appointment.class, appointmentId);
-            Patient patient = session.get(Patient.class, idMedicalCard);
-            appointment.setPatient(patient);
-            session.persist(appointment);
-            session.getTransaction().commit();
-        }
-    }
+//        public void editAppointmentDate(Long idAppointment, Date newDate) {
+//        try (Session session = sessionFactory.openSession()) {
+//            Transaction tx = session.beginTransaction();
+//
+//            Appointment appointment = session.get(Appointment.class, idAppointment);
+//            appointment.setAppointmentDate(newDate);
+//
+//            session.persist(appointment);
+//            tx.commit();
+//        }
+//    }
 }

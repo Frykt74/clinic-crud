@@ -45,18 +45,6 @@ public class FavorRepository {
         }
     }
 
-
-    public void deleteById(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Favor favor = session.get(Favor.class, id);
-            if (favor != null) {
-                session.delete(favor);
-            }
-            session.getTransaction().commit();
-        }
-    }
-
     public List<Favor> findAllByName(String name) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -66,7 +54,7 @@ public class FavorRepository {
             return session.createQuery(criteriaQuery).getResultList();
         }
     }
-
+//TODO: 3
     public List<Favor> findFavorByDoctorsLastName(String lastName) {
         try (Session session = sessionFactory.openSession()) {
             String queryString = "SELECT s.* " +
@@ -79,4 +67,15 @@ public class FavorRepository {
                     .getResultList();
         }
     }
+
+//    public void deleteById(Long id) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            Favor favor = session.get(Favor.class, id);
+//            if (favor != null) {
+//                session.delete(favor);
+//            }
+//            session.getTransaction().commit();
+//        }
+//    }
 }

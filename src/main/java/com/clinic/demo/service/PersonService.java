@@ -17,9 +17,9 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Person findPersonById(Long id) {
-        return personRepository.findPersonById(id);
-    }
+//    public Person findPersonById(Long id) {
+//        return personRepository.findPersonById(id);
+//    }
 
     public List<Person> findAllPeople() {
         return personRepository.findAllPeople();
@@ -29,8 +29,8 @@ public class PersonService {
         personRepository.savePerson(person);
     }
 
-    public void deletePersonById(Long id) {
-        personRepository.deletePersonById(id);
-    }
+//    public void deletePersonById(Long id) {
+//        personRepository.deletePersonById(id);
+//    }
 }
 

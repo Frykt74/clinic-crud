@@ -19,11 +19,7 @@ public class PersonRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public Person findPersonById(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Person.class, id);
-        }
-    }
+
 
     public List<Person> findAllPeople() {
         try (Session session = sessionFactory.openSession()) {
@@ -38,17 +34,23 @@ public class PersonRepository {
     public void savePerson(Person person) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.saveOrUpdate(person);
+            session.persist(person);
             session.getTransaction().commit();
         }
     }
 
-    public void deletePersonById(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Person person = session.load(Person.class, id);
-            session.delete(person);
-            session.getTransaction().commit();
-        }
-    }
+//    public Person findPersonById(Long id) {
+//        try (Session session = sessionFactory.openSession()) {
+//            return session.get(Person.class, id);
+//        }
+//    }
+//
+//    public void deletePersonById(Long id) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            Person person = session.load(Person.class, id);
+//            session.delete(person);
+//            session.getTransaction().commit();
+//        }
+//    }
 }

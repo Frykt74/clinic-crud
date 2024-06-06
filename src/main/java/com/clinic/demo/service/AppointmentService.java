@@ -46,4 +46,12 @@ public class AppointmentService {
     public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
         appointmentRepository.updateAppointmentPatient(appointmentId, idMedicalCard);
     }
+
+    public List<Appointment> findByDoctor(String doctorLastName) {
+        return appointmentRepository.findAppointmentsByDoctorLastName(doctorLastName);
+    }
+
+    public List<Appointment> findByPatient(String patientLastName) {
+        return appointmentRepository.findAppointmentsByPatientLastName(patientLastName);
+    }
 }

@@ -40,19 +40,19 @@ public class DoctorRepository {
     public void save(Doctor doctor) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.saveOrUpdate(doctor);
+            session.persist(doctor);
             session.getTransaction().commit();
         }
     }
 
-    public void deleteById(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Doctor doctor = session.load(Doctor.class, id);
-            session.delete(doctor);
-            session.getTransaction().commit();
-        }
-    }
+//    public void deleteById(Long id) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            Doctor doctor = session.load(Doctor.class, id);
+//            session.delete(doctor);
+//            session.getTransaction().commit();
+//        }
+//    }
 
 //    public List<Doctor> findAllDoctorsByService(Favor favor) {
 //        try (Session session = sessionFactory.openSession()) {
