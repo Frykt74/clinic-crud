@@ -31,21 +31,20 @@ public class PersonController {
         return "people";
     }
 
-    // Показать форму для создания новой персоны
     @GetMapping("/new")
     public String showNewPersonForm(Model model) {
         model.addAttribute("person", new Person());
         return "person-form";
     }
 
-    // Сохранить новую персону
     @PostMapping("/save")
     public String savePerson(@ModelAttribute("person") @DateTimeFormat(pattern = "dd.MM.yyyy") Person person) {
         personService.savePerson(person);
         return "redirect:/people";
     }
 //
-//    // Показать форму для редактирования персоны
+//    Показать форму для редактирования персоны
+//    show form for edit person
 //    @GetMapping("/{id}/edit")
 //    public String showEditPersonForm(@PathVariable Long id, Model model) {
 //        Person person = personService.findById(id);
@@ -53,14 +52,16 @@ public class PersonController {
 //        return "edit-person";
 //    }
 //
-//    // Обновить персону
+//    Обновить персону
+//    update person
 //    @PostMapping("/{id}/update")
 //    public String updatePerson(@PathVariable Long id, @ModelAttribute Person person) {
 //        personService.saveAppointment(person);
 //        return "redirect:/people/";
 //    }
 //
-//    // Удалить персону
+//    Удалить персону
+//    delete person
 //    @GetMapping("/{id}/delete")
 //    public String deletePersonById(@PathVariable Long id) {
 //        personService.delete(id);

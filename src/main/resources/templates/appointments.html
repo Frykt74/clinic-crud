@@ -13,7 +13,33 @@
 
 <div class="container my-2">
     <h1>Запись на приём</h1>
-    <a th:href="@{/appointments/new}" class="btn btn-primary btn-sm mb-3">Добавить запись</a>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <a th:href="@{/appointments/new}" class="btn btn-primary btn-lg me-3">Добавить запись</a>
+
+        <div>
+            <form th:action="@{/appointments/searchDoctor}" method="get" class="form-inline mb-3">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="doctorLastName" class="sr-only">Фамилия врача</label>
+                    <input type="text" class="form-control" id="doctorLastName" name="doctorLastName" placeholder="Фамилия врача">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 btn-custom-size">Поиск по фамилии врача</button>
+            </form>
+
+            <form th:action="@{/appointments/searchPatient}" method="get" class="form-inline mb-3">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="patientLastName" class="sr-only">Фамилия пациента</label>
+                    <input type="text" class="form-control" id="patientLastName" name="patientLastName" placeholder="Фамилия пациента">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 btn-custom-size">Поиск по фамилии пациента</button>
+            </form>
+        </div>
+    </div>
+    <style>
+        .btn-custom-size {
+            width: 100%;
+            max-width: 230px;
+        }
+    </style>
 
     <table border="1" class="table table-striped table-responsive-md">
         <thead>

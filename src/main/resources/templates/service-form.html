@@ -11,15 +11,12 @@
     <h1>Управление услугами</h1>
     <hr>
     <h2>Сохранить информацию</h2>
-
     <form action="#" th:action="@{/favors/save}" th:object="${favor}" method="POST">
 
 
         <button type="submit" class="btn btn-info col-2">Сохранить</button>
     </form>
-
     <hr>
-
     <a th:href="@{/people}">К общему списку</a>
 </div>
 </body>

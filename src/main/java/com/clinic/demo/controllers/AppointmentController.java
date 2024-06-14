@@ -113,25 +113,18 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("/appointments-search")
-    public String listAppointments(Model model) {
-        List<Appointment> appointments = appointmentService.findAllAppointments();
-        model.addAttribute("appointments", appointments);
-        return "appointments-list";
-    }
-
     @GetMapping("/searchDoctor")
     public String searchByDoctorLastName(@RequestParam("doctorLastName") String doctorLastName, Model model) {
         List<Appointment> appointments = appointmentService.findByDoctor(doctorLastName);
         model.addAttribute("appointments", appointments);
-        return "appointments-list";
+        return "appointments";
     }
 
     @GetMapping("/searchPatient")
     public String searchByPatientLastName(@RequestParam("patientLastName") String patientLastName, Model model) {
         List<Appointment> appointments = appointmentService.findByPatient(patientLastName);
         model.addAttribute("appointments", appointments);
-        return "appointments-list";
+        return "appointments";
     }
 }
 

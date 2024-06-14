@@ -2,19 +2,18 @@ package com.clinic.demo.repository;
 
 import com.clinic.demo.entity.Appointment;
 import com.clinic.demo.entity.MedicalCard;
-import com.clinic.demo.entity.Patient;
 import com.clinic.demo.service.MedicalCardService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +44,7 @@ public class AppointmentRepository {
             return session.createQuery(criteriaQuery).getResultList();
         }
     }
+
 
     public void save(Appointment appointment) {
         try (Session session = sessionFactory.openSession()) {
@@ -93,39 +93,56 @@ public class AppointmentRepository {
         }
     }
 
+//    public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
+//        try (Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//            Appointment appointment = session.get(Appointment.class, appointmentId);
+//            Patient patient = session.get(Patient.class, idMedicalCard);
+//            appointment.setPatient(patient);
+//            session.persist(appointment);
+//            session.getTransaction().commit();
+//        }
+//    }
+
     public void updateAppointmentPatient(Long appointmentId, Long idMedicalCard) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Appointment appointment = session.get(Appointment.class, appointmentId);
-            Patient patient = session.get(Patient.class, idMedicalCard);
-            appointment.setPatient(patient);
-            session.persist(appointment);
-            session.getTransaction().commit();
+        try (Connection connection = sessionFactory.getSessionFactoryOptions().getServiceRegistry().getService(ConnectionProvider.class).getConnection()) {
+            String sql = "UPDATE appointment SET id_medical_card = ? WHERE id_appointment = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setLong(1, idMedicalCard);
+                statement.setLong(2, appointmentId);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            // exception handler
         }
     }
 
+
     public List<Appointment> findAppointmentsByDoctorLastName(String doctorLastName) {
-        Session session = sessionFactory.getCurrentSession();
-        String hql = "SELECT a FROM Appointment a " +
-                "JOIN a.favor f " +
-                "JOIN f.doctor d " +
-                "JOIN d.person p " +
-                "WHERE p.lastName LIKE :doctorLastName";
-        Query<Appointment> query = session.createQuery(hql, Appointment.class);
-        query.setParameter("doctorLastName", "%" + doctorLastName + "%");
-        return query.getResultList();
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "SELECT a FROM Appointment a " +
+                    "JOIN a.favor f " +
+                    "JOIN f.doctor d " +
+                    "JOIN d.person p " +
+                    "WHERE p.lastName ILIKE :doctorLastName";
+            Query<Appointment> query = session.createQuery(hql, Appointment.class);
+            query.setParameter("doctorLastName", "%" + doctorLastName + "%");
+            return query.getResultList();
+        }
     }
 
     public List<Appointment> findAppointmentsByPatientLastName(String patientLastName) {
-        Session session = sessionFactory.getCurrentSession();
-        String hql = "SELECT a FROM Appointment a " +
-                "JOIN a.patient pt " +
-                "JOIN pt.person pp " +
-                "WHERE pp.lastName LIKE :patientLastName";
-        Query<Appointment> query = session.createQuery(hql, Appointment.class);
-        query.setParameter("patientLastName", "%" + patientLastName + "%");
-        return query.getResultList();
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "SELECT a FROM Appointment a " +
+                    "JOIN a.patient pt " +
+                    "JOIN pt.person pp " +
+                    "WHERE pp.lastName ILIKE :patientLastName";
+            Query<Appointment> query = session.createQuery(hql, Appointment.class);
+            query.setParameter("patientLastName", "%" + patientLastName + "%");
+            return query.getResultList();
+        }
     }
+}
 //    public void deleteById(Long id) {
 //        try (Session session = sessionFactory.openSession()) {
 //            session.beginTransaction();
@@ -164,4 +181,4 @@ public class AppointmentRepository {
 //            tx.commit();
 //        }
 //    }
-}
+//}

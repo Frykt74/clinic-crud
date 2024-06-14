@@ -45,23 +45,35 @@ public class FavorRepository {
         }
     }
 
+//    public List<Favor> findAllByName(String name) {
+//        try (Session session = sessionFactory.openSession()) {
+//            CriteriaBuilder builder = session.getCriteriaBuilder();
+//            CriteriaQuery<Favor> criteriaQuery = builder.createQuery(Favor.class);
+//            Root<Favor> root = criteriaQuery.from(Favor.class);
+//            criteriaQuery.select(root).where(builder.equal(root.get("name"), name));
+//            return session.createQuery(criteriaQuery).getResultList();
+//        }
+//    }
+
     public List<Favor> findAllByName(String name) {
         try (Session session = sessionFactory.openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Favor> criteriaQuery = builder.createQuery(Favor.class);
-            Root<Favor> root = criteriaQuery.from(Favor.class);
-            criteriaQuery.select(root).where(builder.equal(root.get("name"), name));
-            return session.createQuery(criteriaQuery).getResultList();
+            String queryString = "SELECT s.* " +
+                    "FROM service s " +
+                    "WHERE s.name ILIKE :name";
+            return session.createNativeQuery(queryString, Favor.class)
+                    .setParameter("name", "%" + name + "%")
+                    .getResultList();
         }
     }
-//TODO: 3
+
+
     public List<Favor> findFavorByDoctorsLastName(String lastName) {
         try (Session session = sessionFactory.openSession()) {
             String queryString = "SELECT s.* " +
                     "FROM service s " +
                     "INNER JOIN doctor d ON s.id_employee = d.id_employee " +
                     "INNER JOIN person p ON d.id_person = p.id_person " +
-                    "WHERE p.last_name LIKE :lastName";
+                    "WHERE p.last_name ILIKE :lastName";
             return session.createNativeQuery(queryString, Favor.class)
                     .setParameter("lastName", "%" + lastName + "%")
                     .getResultList();

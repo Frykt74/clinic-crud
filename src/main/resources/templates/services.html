@@ -10,18 +10,15 @@
     <title>Services</title>
 </head>
 <body>
-
 <div class="container my-2">
     <h1>Список услуг</h1>
     <a th:href="@{/favors/new}" class="btn btn-primary btn-sm mb-3">Добавить услугу</a>
-
     <table class="table table-striped table-responsive-md">
         <thead>
         <tr>
             <th>ID услуги</th>
             <th>Наименование</th>
             <th>Стоимость</th>
-
         </tr>
         </thead>
         <tbody>
@@ -29,11 +26,9 @@
             <td th:text="${favor.idService}"></td>
             <td th:text="${favor.name}"></td>
             <td th:text="${favor.price + ' руб.'}"></td>
-
         </tr>
         </tbody>
     </table>
 </div>
-
 </body>
 </html>

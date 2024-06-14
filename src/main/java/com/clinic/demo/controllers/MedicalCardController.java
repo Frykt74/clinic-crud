@@ -60,13 +60,4 @@ public class MedicalCardController {
         medicalCardService.saveCard(medicalCard);
         return "redirect:/patients/search-for-doctor";
     }
-
-//    @PostMapping("/patient/{appointmentId}")
-//    public String saveMedicalCard(@RequestParam("appointmentId") Long appointmentId) {
-//        Appointment appointment = appointmentService.findAppointmentById(appointmentId);
-//        MedicalCard medicalCard = new MedicalCard();
-//        medicalCard.setAppointment(appointment);
-//        medicalCardService.saveCard(medicalCard);
-//        return "redirect:/patients/search-for-doctor";
-//    }
 }

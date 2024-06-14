@@ -45,7 +45,6 @@ public class PatientRepository {
         }
     }
 
-//TODO: 1
     public List<Patient> findPatientByLastName(String lastName) {
         try (Session session = sessionFactory.openSession()) {
             String queryString = "SELECT p.* FROM patient p " +
@@ -65,7 +64,7 @@ public class PatientRepository {
                     .getResultList();
         }
     }
-//    TODO: 2
+
     public List<Patient> findPatientByFirstName(String firstName) {
         try (Session session = sessionFactory.openSession()) {
             String queryString = "SELECT p.* FROM patient p " +

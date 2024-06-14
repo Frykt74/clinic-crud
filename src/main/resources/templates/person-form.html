@@ -11,7 +11,6 @@
     <h1>Управление данными о человеке</h1>
     <hr>
     <h2>Сохранить информацию</h2>
-
     <form action="#" th:action="@{/people/save}" th:object="${person}" method="POST">
 
         <input type="text" th:field="*{lastName}" placeholder="Фамилия" class="form-control mb-4 col-4">
@@ -22,12 +21,9 @@
 
         <input type="text" th:field="*{dateOfBirth}" placeholder="Дата рождения" class="form-control mb-4 col-4">
 
-
         <button type="submit" class="btn btn-info col-2">Сохранить</button>
     </form>
-
     <hr>
-
     <a th:href="@{/people}">К общему списку</a>
 </div>
 </body>
